@@ -1,0 +1,27 @@
+.container-info {
+  padding: 150px;
+  border-radius: 100%;
+  background-repeat: no-repeat !important;
+  background-color: #f0f0f0;
+  background-size: cover !important;
+  object-fit: cover !important;
+  border: 3px solid black;
+  cursor: pointer;
+}
+
+.scroll-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+.perfil {
+  padding: 150px;
+  width: 50%;
+  background-repeat: no-repeat !important;
+  margin: auto;
+  object-fit: cover !important;
+  background-size: cover !important;
+  border-radius: 5px;
+}
+
