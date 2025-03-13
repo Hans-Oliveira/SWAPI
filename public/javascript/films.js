@@ -5,9 +5,7 @@ $(document).ready(function() {
 
     $("#testee").click(() => {
         createModalBody(people);
-
     });
-
 
     const getPeople = async (characters) => {
 
@@ -16,7 +14,6 @@ $(document).ready(function() {
         }
         
         try {
-
             Swal.fire({
                 title: 'Carregando...',
                 text: 'Aguarde enquanto processamos seus dados.',
@@ -44,10 +41,10 @@ $(document).ready(function() {
                 text: 'Algo inesperado aconteceu, tente novamente!',
                 icon: 'warning',
                 confirmButtonText: 'OK'
-            })
+            });
         }
 
-        getImage("people", people)
+        getImage("people", people);
     }
 
     getPeople(characters);
@@ -56,7 +53,6 @@ $(document).ready(function() {
     const getImage = async (type, people) => {
 
         try {
-
             await $.ajax({
                 type: "GET",
                 url: `../../controller/FilmsControl.php`,
@@ -81,11 +77,10 @@ $(document).ready(function() {
                 text: 'Algo inesperado aconteceu, tente novamente!',
                 icon: 'warning',
                 confirmButtonText: 'OK'
-            })
+            });
         }
 
     }
-
 
     const createModalBody = (people) => {
         
@@ -101,7 +96,7 @@ $(document).ready(function() {
     const startPeople = (people) => {
 
         $(".container-info").click(function () {
-            
+
             $("#perfil").empty();
             $("#description").empty();
 
@@ -112,15 +107,12 @@ $(document).ready(function() {
             $("#perfil").append(`<div class="perfil" style="background: url(${character[0].photo})"></div>`);
 
             $("#description").append(`
-                <h3>Tamanho: ${character[0].height}</h3>
-                <h3>Peso: ${character[0].mass}</h3>
-                <h3>Antes da Batalha de Yavin: ${character[0].birth_year}</h3>
-                <h3>Cor dos olhos: ${character[0].eye_color}</h3>
-                <h3>Cor da pele: ${character[0].skin_color}</h3>
+                <h3>Tamanho: ${character[0].height == "unknown" ? "Desconhecida" : character[0].height}</h3>
+                <h3>Peso: ${character[0].mass  == "unknown" ? "Desconhecido" : character[0].mass}</h3>
+                <h3>Antes da Batalha de Yavin: ${character[0].birth_year  == "unknown" ? "Desconhecida" : character[0].birth_year}</h3>
+                <h3>Cor dos olhos: ${character[0].eye_color  == "unknown" ? "Desconhecido" : character[0].eye_color}</h3>
+                <h3>Cor da pele: ${character[0].skin_color  == "unknown" ? "Desconhecida" : character[0].skin_color}</h3>
             `);
-
         });
-
     };
-
 });

@@ -15,9 +15,10 @@ $(document).ready(function() {
                 }
             });
     
-            getImages(type)
+            getImages(type);
+
         } catch (error) {
-            console.log(error);
+
             Swal.fire({
                 title: 'Erro',
                 text: 'Algo inesperado aconteceu, tente novamente!',
@@ -29,25 +30,33 @@ $(document).ready(function() {
 
     api(type);
 
+    const getImages = (type) => {
 
-    const getImages = (type, ) => {
+        try {
+            $.ajax({
+                type: "GET",
+                url: "../../controller/FilmsControl.php",
+                data: {typeImage: type, api: "api"},
+                success: function (response) {
+    
+                    response.forEach(e => {
+                        for (const key of result) {
+                            e.name == key.title ? key.photo = e.url : null;
+                        }
+                    });
+    
+                    createAttCarrousel(type, result)
+                }
+            });  
+        } catch (error) {
 
-        $.ajax({
-            type: "GET",
-            url: "../../controller/FilmsControl.php",
-            data: {typeImage: type, api: "api"},
-            success: function (response) {
-
-                response.forEach(e => {
-                    for (const key of result) {
-                        e.name == key.title ? key.photo = e.url : null;
-                    }
-                });
-
-                createAttCarrousel(type, result)
-            }
-        });
-
+            Swal.fire({
+                title: 'Erro',
+                text: 'Algo inesperado aconteceu, tente novamente!',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            })
+        }
     }
 
     const createAttCarrousel = (type, result) => {
@@ -62,7 +71,7 @@ $(document).ready(function() {
 
             carrousel.append(` 
             <div class="carousel-item ${activeClass}">
-                <a href="/view/films.php?id=${e.url.split("/")[5]}&type=${type}" style="cursor: pointer; text-decoration: none; color: white;"">
+                <a href="/?page=films&id=${e.url.split("/")[5]}&type=${type}" style="cursor: pointer; text-decoration: none; color: white;"">
                     <h5>Name: ${e.title}</h5>
                     <h5>Release Date: ${e.release_date}</h5>
                     <img class="d-block w-100" src="${e.photo}" alt="Film: ${e.title} and Release Date:${e.release_date}">
