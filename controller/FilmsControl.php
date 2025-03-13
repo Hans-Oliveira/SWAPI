@@ -1,7 +1,6 @@
 <?php
 
-include "../model/FilmsModel.php";
-
+require_once __DIR__ . "/../model/FilmsModel.php";
 
 
 if(isset($_GET['type'])) {
@@ -9,7 +8,7 @@ if(isset($_GET['type'])) {
 }
 
 if(isset($_GET['typeImage'])){
-    $data = Image::getImage($_GET['typeImage'], $_GET['name']);
+    $data = Image::getImage($_GET['typeImage']);
 }
 
 
